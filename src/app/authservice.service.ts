@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { initializeApp } from 'firebase/app';  // Import the initializeApp function
-import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, User, createUserWithEmailAndPassword} from 'firebase/auth';  // Import Authentication methods
+import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, User, createUserWithEmailAndPassword, signInAnonymously, UserCredential} from 'firebase/auth';  // Import Authentication methods
 import firebaseConfig from '../environment';  // Your Firebase config
 
 @Injectable({
@@ -16,9 +16,6 @@ export class AuthserviceService {
     this.auth = getAuth()
   }
 
-  
-  
-  // Method to log in a user
   login(email: string, password: string): Promise<User> {
     return signInWithEmailAndPassword(this.auth, email, password)
       .then((userCredential) => {
@@ -33,18 +30,27 @@ export class AuthserviceService {
       });
   }
 
-  // Method to log out a user
   logout(): Promise<void> {
     return signOut(this.auth);
   }
 
-  // Method to get the current user
   getCurrentUser(): User | null {
     return this.auth.currentUser;
   }
 
-  // Method to check if the user is authenticated
   isAuthenticated(): boolean {
     return !!this.auth.currentUser;
+  }
+
+  signInAsGuest(): Promise<void> {
+    return new Promise((resolve, reject) => {
+      signInAnonymously(this.auth)
+        .then(() => {
+          resolve(); 
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
   }
 }

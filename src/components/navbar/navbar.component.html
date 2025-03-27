@@ -1,0 +1,41 @@
+<nav class="bg-white shadow-md w-full">
+    <div class="max-w-full mx-auto px-4 sm:px-4 lg:px-4">
+      <div class="flex justify-between h-16 items-center">
+        <!-- Mobile Menu Button on the Left -->
+        <button (click)="toggleMobileMenu()" class="md:hidden focus:outline-none">
+          <svg class="w-8 h-8 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+          </svg>
+        </button>
+  
+        <!-- Logo and Company Name in the Middle on Mobile -->
+        <a href="/main" class="text-2xl font-bold text-blue-600 absolute left-1/2 transform -translate-x-1/2 md:static md:translate-x-0">Reviewify</a>
+  
+        <!-- Navigation Links for Desktop -->
+        <div class="hidden md:flex space-x-8">
+          <a href="/cars" class="text-gray-600 hover:text-blue-600">Cars</a>
+          <a href="/clothes" class="text-gray-600 hover:text-blue-600">Clothes</a>
+          <a href="/household" class="text-gray-600 hover:text-blue-600">Household</a>
+        </div>
+  
+        <!-- Profile Dropdown -->
+        <div class="relative">
+          <button (click)="toggleDropdown()" class="focus:outline-none">
+            <img src="/assets/profile-icon.svg" alt="Profile" class="h-8 w-8 rounded-full">
+          </button>
+  
+          <div *ngIf="dropdownOpen" class="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg overflow-hidden z-20">
+            <a href="/profile" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Profile</a>
+            <a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" (click)="logout()">Logout</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Mobile Menu -->
+    <div *ngIf="mobileMenuOpen" class="md:hidden">
+      <a href="/cars" class="block px-4 py-2 text-gray-600 hover:text-blue-600">Cars</a>
+      <a href="/clothes" class="block px-4 py-2 text-gray-600 hover:text-blue-600">Clothes</a>
+      <a href="/household" class="block px-4 py-2 text-gray-600 hover:text-blue-600">Household</a>
+    </div>
+  </nav>
