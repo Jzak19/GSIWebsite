@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { initializeApp } from 'firebase/app';  // Import the initializeApp function
-import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, User, createUserWithEmailAndPassword, signInAnonymously, UserCredential} from 'firebase/auth';  // Import Authentication methods
+import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, User, createUserWithEmailAndPassword, signInAnonymously, UserCredential, setPersistence, browserLocalPersistence, browserSessionPersistence} from 'firebase/auth';  // Import Authentication methods
 import firebaseConfig from '../environment';  // Your Firebase config
 
 @Injectable({
@@ -17,9 +17,18 @@ export class AuthserviceService {
   }
 
   login(email: string, password: string): Promise<User> {
-    return signInWithEmailAndPassword(this.auth, email, password)
+    return setPersistence(this.auth, browserLocalPersistence)  // Set persistence first
+      .then(() => {
+        return signInWithEmailAndPassword(this.auth, email, password);  // Then sign in
+      })
       .then((userCredential) => {
+        // Store the user if needed (Optional step)
+        console.log('User signed in:', userCredential.user);
         return userCredential.user;
+      })
+      .catch((error) => {
+        console.error("Error during login:", error);
+        throw error;
       });
   }
   
@@ -31,6 +40,7 @@ export class AuthserviceService {
   }
 
   logout(): Promise<void> {
+    sessionStorage.removeItem('userUID')
     return signOut(this.auth);
   }
 
@@ -45,12 +55,17 @@ export class AuthserviceService {
   signInAsGuest(): Promise<void> {
     return new Promise((resolve, reject) => {
       signInAnonymously(this.auth)
-        .then(() => {
+        .then((userCredential) => {
+          localStorage.setItem('userUID', userCredential.user.uid);
           resolve(); 
         })
         .catch((error) => {
           reject(error);
         });
     });
+  }
+
+  getAuth() {
+    return this.auth;
   }
 }
