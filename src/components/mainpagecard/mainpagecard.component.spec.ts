@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ImagetextpanelComponent } from './imagetextpanel.component';
+import { MainpagecardComponent } from './mainpagecard.component';
 
-describe('ImagetextpanelComponent', () => {
-  let component: ImagetextpanelComponent;
-  let fixture: ComponentFixture<ImagetextpanelComponent>;
+describe('MainpagecardComponent', () => {
+  let component: MainpagecardComponent;
+  let fixture: ComponentFixture<MainpagecardComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ImagetextpanelComponent]
+      imports: [MainpagecardComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ImagetextpanelComponent);
+    fixture = TestBed.createComponent(MainpagecardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
