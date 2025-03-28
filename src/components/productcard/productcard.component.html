@@ -1,0 +1,21 @@
+   <a href=""  class="block transform transition-transform duration-300 hover:scale-105"> 
+    <div class="max-w-xs h-80 rounded-xl overflow-hidden shadow-lg bg-white">
+        <!-- Product Image -->
+        <img class="w-full h-40 object-cover rounded-t-xl" [src]="image" alt="{{ title }}">
+        
+        <!-- Product Details -->
+        <div class="px-4 py-4 h-32 flex flex-col justify-between">
+        <!-- Title -->
+        <h2 class="font-semibold text-lg text-gray-800 truncate">{{ title }}</h2>
+    
+        <!-- Description -->
+        <p class="text-gray-600 text-sm mt-2 line-clamp-2">{{ description }}</p>
+        </div>
+    
+        <!-- Review Count -->
+        <div class="px-4 py-2 flex items-center text-gray-700">
+        <span class="mr-2 text-yellow-500">⭐</span>
+        <span class="text-sm">{{ reviewCount }} Reviews</span>
+        </div>
+    </div>
+   </a>
