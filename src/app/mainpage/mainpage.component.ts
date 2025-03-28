@@ -41,27 +41,5 @@ export class MainpageComponent implements OnInit {
     });
   }
 
-  public cards = [
-    {
-      imageSrc: 'assets/image1.jpg',
-      title: 'Card 1',
-      description: 'This is the description for Card 1.',
-      link: '/card1'
-    },
-    {
-      imageSrc: 'assets/image2.jpg',
-      title: 'Card 2',
-      description: 'This is the description for Card 2.',
-      link: '/card2'
-    },
-    {
-      imageSrc: 'assets/image3.jpg',
-      title: 'Card 3',
-      description: 'This is the description for Card 3.',
-      link: '/card3'
-    }
-  ];
-
-
   
 }
