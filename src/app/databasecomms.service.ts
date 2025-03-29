@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, addDoc, doc, getDocs} from 'firebase/firestore';
+import { getFirestore, collection, addDoc, doc, getDocs, getDoc} from 'firebase/firestore';
 import firebaseConfig from '../environment';
 
 @Injectable({
@@ -13,6 +13,8 @@ export class DatabasecommsService {
   constructor() {
     const app = initializeApp(firebaseConfig);
     this.db = getFirestore(app);
+
+
   }
 
   async uploadProduct(
@@ -82,6 +84,32 @@ export class DatabasecommsService {
       return products;
     } catch (error) {
       console.error('Error fetching products:', error);
+      return [];
+    }
+  }
+
+  
+
+  async getProductReviews(productId: string, docId: string): Promise<any> {
+    try {
+      const productDocRef = doc(this.db, `products/${productId}/items/${docId}`);
+      const productDocSnap = await getDoc(productDocRef);
+  
+      if (productDocSnap.exists()) {
+
+        const reviews = productDocSnap.data()?.['reviews'] || [];
+        const updatedReviews = reviews.map((review: any) => ({
+          ...review,
+          username: review.username || 'Guest user',
+        }));
+  
+        return updatedReviews;
+      } else {
+        console.log('No such document!');
+        return [];
+      }
+    } catch (error) {
+      console.error('Error getting document:', error);
       return [];
     }
   }

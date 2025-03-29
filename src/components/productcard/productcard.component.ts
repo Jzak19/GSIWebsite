@@ -16,7 +16,8 @@ export class ProductcardComponent {
   @Input() title: string = '';
   @Input() description: string = '';
   @Input() reviewCount: number = 0;
-  @Input() year: number = 0
+  @Input() year: number = 0;
+  @Input() ID: string = '';
 
   goToProductPage(event: Event, product: any) {
     event.preventDefault();
