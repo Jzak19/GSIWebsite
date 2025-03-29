@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-productcard',
@@ -8,9 +9,18 @@ import { Component, Input } from '@angular/core';
   styleUrl: './productcard.component.css'
 })
 export class ProductcardComponent {
+
+  constructor(private router: Router){}
+
   @Input() image: string = '';
   @Input() title: string = '';
   @Input() description: string = '';
   @Input() reviewCount: number = 0;
   @Input() year: number = 0
+
+  goToProductPage(event: Event, product: any) {
+    event.preventDefault();
+    this.router.navigate(['product'], { state: { product } });
+    console.log('Product Info:', product);
+  }
 }

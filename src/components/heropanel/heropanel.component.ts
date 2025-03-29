@@ -9,6 +9,7 @@ import { Component, Input } from '@angular/core';
 })
 export class HeropanelComponent {
 
-    @Input() userName: string=''
+    @Input() userName?: string=''
+    @Input() title?: string=''
     @Input() message: string=''
 }

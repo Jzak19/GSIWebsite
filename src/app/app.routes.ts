@@ -5,6 +5,7 @@ import { ClothespageComponent } from './subpages/clothespage/clothespage.compone
 import { CarspageComponent } from './subpages/carspage/carspage.component';
 import { HousepageComponent } from './subpages/housepage/housepage.component';
 import { ProfilepageComponent } from './profilepage/profilepage.component';
+import { ProductpageComponent } from './subpages/productpage/productpage.component';
 
 
 
@@ -14,5 +15,6 @@ export const routes: Routes = [
     {path: 'clothes', component: ClothespageComponent},
     {path: 'cars', component: CarspageComponent},
     {path: 'household', component: HousepageComponent},
-    {path: 'profile', component: ProfilepageComponent}
+    {path: 'profile', component: ProfilepageComponent},
+    {path: 'product', component: ProductpageComponent}
 ];

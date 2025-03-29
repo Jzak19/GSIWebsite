@@ -1,4 +1,4 @@
-   <a href=""  class="block transform transition-transform duration-300 hover:scale-105"> 
+   <a class="block transform transition-transform duration-300 hover:scale-105" (click)="goToProductPage($event, { title, year, description, reviewCount, image })"> 
     <div class="max-w-xs h-85 rounded-xl overflow-hidden shadow-lg bg-white">
         <!-- Product Image -->
         <img class="w-full h-40 object-cover rounded-t-xl" [src]="image" alt="{{ title }}">
