@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, addDoc, doc } from 'firebase/firestore';
+import { getFirestore, collection, addDoc, doc, getDocs} from 'firebase/firestore';
 import firebaseConfig from '../environment';
 
 @Injectable({
@@ -64,5 +64,25 @@ export class DatabasecommsService {
     }
   }
 
-  
+  async getProducts(category: string): Promise<any[]> {
+    try {
+      if (!['cars', 'clothes', 'household'].includes(category)) {
+        throw new Error('Invalid category');
+      }
+
+      const productDocRef = doc(this.db, 'products', category);
+      const productCollection = collection(productDocRef, 'items');
+      const querySnapshot = await getDocs(productCollection);
+
+      const products = querySnapshot.docs.map(doc => ({
+        docID: doc.id,
+        ...doc.data()
+      }));
+
+      return products;
+    } catch (error) {
+      console.error('Error fetching products:', error);
+      return [];
+    }
+  }
 }
