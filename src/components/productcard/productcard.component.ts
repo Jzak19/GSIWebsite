@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -18,6 +18,7 @@ export class ProductcardComponent {
   @Input() reviewCount: number = 0;
   @Input() year: number = 0;
   @Input() ID: string = '';
+  @Input() type: string = '';
 
   goToProductPage(event: Event, product: any) {
     event.preventDefault();

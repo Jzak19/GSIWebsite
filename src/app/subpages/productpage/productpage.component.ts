@@ -28,7 +28,7 @@ export class ProductpageComponent implements OnInit{
 
   ngOnInit(): void {
     if (this.product) {
-      const productId = 'cars'; 
+      const productId = this.product.type; 
       const docId = this.product.ID; 
       this.db.getProductReviews(productId, docId).then((reviews) => {
         this.reviews = reviews;
