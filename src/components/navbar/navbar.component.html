@@ -25,7 +25,11 @@
           </button>
   
           <div *ngIf="dropdownOpen" class="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg overflow-hidden z-20">
-            <a href="/profile" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Profile</a>
+            @if (this.auth.getCurrentUser()?.isAnonymous == false) {
+              <a href="/profile" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Profile</a>
+            } @else {
+              <a href="" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Sign Up</a>
+            }
             <a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" (click)="logout()">Logout</a>
           </div>
         </div>

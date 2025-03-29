@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from "../../../components/navbar/navbar.component";
 import { ProductcardComponent } from "../../../components/productcard/productcard.component";
+import { DatabasecommsService } from '../../databasecomms.service';
 
 @Component({
   selector: 'app-housepage',
@@ -11,6 +12,10 @@ import { ProductcardComponent } from "../../../components/productcard/productcar
   styleUrl: './housepage.component.css'
 })
 export class HousepageComponent {
+
+  constructor(private db: DatabasecommsService) {
+  }
+
   householdItems = [
     {
       name: 'Vacuum Cleaner',

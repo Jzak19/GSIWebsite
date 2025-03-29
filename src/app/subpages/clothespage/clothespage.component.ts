@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from "../../../components/navbar/navbar.component";
 import { ProductcardComponent } from "../../../components/productcard/productcard.component";
+import { DatabasecommsService } from '../../databasecomms.service';
 
 @Component({
   selector: 'app-clothespage',
@@ -11,6 +12,11 @@ import { ProductcardComponent } from "../../../components/productcard/productcar
   styleUrl: './clothespage.component.css'
 })
 export class ClothespageComponent {
+
+  constructor(private db: DatabasecommsService){
+    
+  }
+
   clothes = [
     {
       name: 'Leather Jacket',

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../../../components/navbar/navbar.component';
 import { ProductcardComponent } from "../../../components/productcard/productcard.component";
+import { DatabasecommsService } from '../../databasecomms.service';
 
 @Component({
   selector: 'app-carspage',
@@ -11,6 +12,12 @@ import { ProductcardComponent } from "../../../components/productcard/productcar
   styleUrl: './carspage.component.css'
 })
 export class CarspageComponent {
+
+  constructor(private db: DatabasecommsService){
+
+    
+  }
+
   cars = [
     {
       name: 'Tesla Model S',
@@ -48,4 +55,9 @@ export class CarspageComponent {
       reviewCount: 3000
     }
   ];
+
+  
+
+  
+
 }

@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent {
 
-  constructor(private auth: AuthserviceService, private router: Router) {}
+  constructor(public auth: AuthserviceService, private router: Router) {}
 
   dropdownOpen = false;
   mobileMenuOpen = false;
