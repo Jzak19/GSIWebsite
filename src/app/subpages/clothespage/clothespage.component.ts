@@ -1,57 +1,31 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from "../../../components/navbar/navbar.component";
 import { ProductcardComponent } from "../../../components/productcard/productcard.component";
 import { DatabasecommsService } from '../../databasecomms.service';
+import { FooterComponent } from "../../../components/footer/footer.component";
 
 @Component({
   selector: 'app-clothespage',
   standalone: true,
-  imports: [NavbarComponent, ProductcardComponent, CommonModule],
+  imports: [NavbarComponent, ProductcardComponent, CommonModule, FooterComponent],
   templateUrl: './clothespage.component.html',
   styleUrl: './clothespage.component.css'
 })
-export class ClothespageComponent {
+export class ClothespageComponent implements OnInit{
+
+  public clothes: any[] = []
 
   constructor(private db: DatabasecommsService){
     
   }
 
-  clothes = [
-    {
-      name: 'Leather Jacket',
-      image: 'https://example.com/leather-jacket.jpg',
-      description: 'A stylish black leather jacket for all occasions, perfect for cool weather.',
-      price: '$120',
-      reviewCount: 450
-    },
-    {
-      name: 'Blue Jeans',
-      image: 'https://example.com/blue-jeans.jpg',
-      description: 'Comfortable and durable blue jeans, a must-have staple for your wardrobe.',
-      price: '$50',
-      reviewCount: 350
-    },
-    {
-      name: 'Red T-shirt',
-      image: 'https://example.com/red-tshirt.jpg',
-      description: 'A vibrant red T-shirt made from soft cotton, perfect for casual wear.',
-      price: '$25',
-      reviewCount: 200
-    },
-    {
-      name: 'Wool Sweater',
-      image: 'https://example.com/wool-sweater.jpg',
-      description: 'A warm and cozy wool sweater, ideal for winter season and cold weather.',
-      price: '$80',
-      reviewCount: 300
-    },
-    {
-      name: 'Sneakers',
-      image: 'https://example.com/sneakers.jpg',
-      description: 'Comfortable sneakers for everyday wear, with a modern design and excellent support.',
-      price: '$90',
-      reviewCount: 550
-    }
-  ];
+  ngOnInit(): void {
+    this.db.getProducts('clothes').then(data => {
+      this.clothes = data;
+      console.log(this.clothes)
+    }).catch(error => {
+      console.error('Error fetching cars:', error);
+    })
+  }
 }

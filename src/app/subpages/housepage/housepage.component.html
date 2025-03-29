@@ -1,11 +1,14 @@
 <app-navbar></app-navbar>
 
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mx-auto mt-20 max-w-full sm:max-w-3xl lg:max-w-6xl justify-items-center">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mx-auto mt-20 max-w-full sm:max-w-3xl lg:max-w-6xl justify-items-center mb-40">
     <app-productcard
       *ngFor="let item of householdItems"
       [image]="item.image"
-      [title]="item.name"
+      [title]="item.model"
       [description]="item.description"
-      [reviewCount]="item.reviewCount">
+      [reviewCount]="item.reviews.length">
     </app-productcard>
   </div>
+
+
+<app-footer></app-footer>
