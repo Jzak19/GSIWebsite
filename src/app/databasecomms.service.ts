@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, addDoc, doc, getDocs, getDoc} from 'firebase/firestore';
+import { getFirestore, collection, addDoc, doc, getDocs, getDoc, updateDoc, arrayUnion} from 'firebase/firestore';
 import firebaseConfig from '../environment';
 
 @Injectable({
@@ -111,6 +111,16 @@ export class DatabasecommsService {
     } catch (error) {
       console.error('Error getting document:', error);
       return [];
+    }
+  }
+
+  async postReview(productType: string, productID: string, review: any): Promise<any> {
+    try{
+      const productRef = doc(this.db, `products/${productType}/items/${productID}`)
+      await updateDoc(productRef, {reviews: arrayUnion(review)})
+      console.log("Review submitted")
+    } catch (error) {
+      console.log(error)
     }
   }
 }
