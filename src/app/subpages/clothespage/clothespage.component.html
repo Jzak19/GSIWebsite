@@ -3,7 +3,7 @@
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mx-auto mt-20 max-w-full sm:max-w-3xl lg:max-w-6xl justify-items-center mb-40">
     <app-productcard
       *ngFor="let clothing of clothes"
-      [image]="clothing.image"
+      [image]="clothing.imageURL"
       [title]="clothing.model"
       [description]="clothing.description"
       [reviewCount]="clothing.reviews.length"

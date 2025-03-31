@@ -1,3 +1,7 @@
+
+<body class="overflow-x-clip">
+  
+
 <app-navbar></app-navbar>
 
 <div class="flex flex-col justify-center items-center">
@@ -15,21 +19,21 @@
   <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl w-full mb-20">
     
     <app-mainpagecard 
-    [imageSrc]="'assets/image1.jpg'" 
+    [imageSrc]="'https://imageio.forbes.com/specials-images/imageserve/5d35eacaf1176b0008974b54/2020-Chevrolet-Corvette-Stingray/0x0.jpg?format=jpg&crop=4560,2565,x790,y784,safe&width=960'" 
     [title]="'Cars'" 
     [description]="'Discover the best cars in the market. Read detailed reviews, user feedback, and compare models to find the perfect car for your needs. Whether you are looking for performance, safety, or fuel efficiency, we have got you covered.'" 
     [link]="'/cars'">
   </app-mainpagecard>
 
   <app-mainpagecard 
-    [imageSrc]="'assets/image2.jpg'" 
+    [imageSrc]="'https://cdn.pixabay.com/photo/2016/04/19/13/39/store-1338629_640.jpg'" 
     [title]="'Clothing'" 
     [description]="'Explore the latest clothing trends and read honest reviews from shoppers. Find out which brands offer the best quality, comfort, and style, all while discovering budget-friendly options for every season.'" 
     [link]="'/clothes'">
   </app-mainpagecard>
 
   <app-mainpagecard 
-    [imageSrc]="'assets/image3.jpg'" 
+    [imageSrc]="'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLzg3r9T8HEMc4nwC9R0y1rpBOb5t4PIiOmg&s'" 
     [title]="'Household'" 
     [description]="'Get insights into the best household products, from cleaning tools to kitchen gadgets. Our in-depth reviews help you make informed decisions on what will make your home more functional, organized, and comfortable.'" 
     [link]="'/household'">
@@ -38,6 +42,12 @@
 </div>
 
 <div class="flex flex-col justify-center items-center">
+  <h1 class="mt-24 md:mt-36 text-4xl md:text-5xl font-bold text-blue-600 mb-20">What our users say...</h1>
+  <app-infinitescroll></app-infinitescroll>
+</div>
+
+
+<div class="flex flex-col justify-center items-center p-6">
   <h1 class="mt-24 md:mt-52 text-4xl md:text-5xl font-bold text-blue-600 mb-20">Our mission...</h1>
 
   <div class="flex flex-col justify-center items-center mb-20">
@@ -53,3 +63,5 @@
 </div>
 
 <app-footer></app-footer>
+
+</body>

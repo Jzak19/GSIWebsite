@@ -22,6 +22,8 @@ export class ProductpageComponent implements OnInit{
   reviews: any;
   username: string = ''
 
+  formChanged = false
+
   
 
   constructor(private router: Router, private db: DatabasecommsService, private auth: AuthserviceService) {
@@ -29,7 +31,12 @@ export class ProductpageComponent implements OnInit{
     this.product = nav?.extras?.state?.['product'];
     if (this.product) {
       console.log('Product received: ', this.product)
+      console.log("Image received", this.product.image)
     }
+
+    this.reviewForm.valueChanges.subscribe(() => {
+      this.formChanged = true
+    })
   }
 
   reviewForm = new FormGroup({

@@ -1,7 +1,11 @@
    <a class="block transform transition-transform duration-300 hover:scale-105 hover:cursor-pointer" (click)="goToProductPage($event, { title, year, description, reviewCount, image, ID, type })"> 
-    <div class="max-w-xs h-85 rounded-xl overflow-hidden shadow-lg bg-white">
+    <div class="min-w-82 max-w-xs h-85 rounded-xl overflow-hidden shadow-lg bg-white">
         <!-- Product Image -->
-        <img class="w-full h-40 object-cover rounded-t-xl" [src]="image" alt="{{ title }}">
+         @if (image) {
+            <img class="w-full h-40 object-cover rounded-t-xl" [src]="image" alt="">
+         } @else {
+            <img class="w-full h-40 object-cover rounded-t-xl" src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png" alt="">
+         }
         
         <!-- Product Details -->
         <div class="px-4 py-4 min-h-32 flex flex-col justify-between">

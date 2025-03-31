@@ -24,12 +24,14 @@ export class DatabasecommsService {
     year?: number,
     reviews: any[] = [],
     size?: string,  
+    imageURL?: string
   ): Promise<void> {
     try {
       let docData: any;
   
       if (category === 'cars') {
         docData = {
+          imageURL,
           model,
           description,
           year,
@@ -37,6 +39,7 @@ export class DatabasecommsService {
         };
       } else if (category === 'clothes') {
         docData = {
+          imageURL,
           model,
           description,
           year,
@@ -45,6 +48,7 @@ export class DatabasecommsService {
         };
       } else if (category === 'household') {
         docData = {
+          imageURL,
           model,
           description,
           reviews,
@@ -168,5 +172,31 @@ export class DatabasecommsService {
     } catch (error) {
       console.error("Error deleting user document:", error);
     }
+  }
+
+  async updateUserProfileImage(userID: string, url: string) {
+    const imageDocRef = doc(this.db, 'users', userID)
+
+    try {
+      await updateDoc(imageDocRef, {imageUrl: url}).then(() => {
+        console.log("updated user image")
+        return url
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  async uploadNewProduct(newProduct: any): Promise<any> {
+
+    const newProductRef = collection(this.db, 'products', newProduct.type, 'items')
+
+    try {
+      await addDoc(newProductRef, newProduct)
+    } catch (error) {
+      console.log(error)
+    }
+
+    console.log("Added new product")
   }
 }

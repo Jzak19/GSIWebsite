@@ -6,11 +6,12 @@ import { HeropanelComponent } from "../../components/heropanel/heropanel.compone
 import { getAuth, onAuthStateChanged, User } from 'firebase/auth';
 import { MainpagecardComponent } from "../../components/mainpagecard/mainpagecard.component";
 import { FooterComponent } from "../../components/footer/footer.component";
+import { InfinitescrollComponent } from "../../components/infinitescroll/infinitescroll.component";
 
 @Component({
   selector: 'app-mainpage',
   standalone: true,
-  imports: [NavbarComponent, HeropanelComponent, MainpagecardComponent, FooterComponent],
+  imports: [NavbarComponent, HeropanelComponent, MainpagecardComponent, FooterComponent, InfinitescrollComponent],
   templateUrl: './mainpage.component.html',
   styleUrl: './mainpage.component.css',
 })
