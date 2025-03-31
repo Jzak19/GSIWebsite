@@ -5,6 +5,7 @@ import { AuthserviceService } from '../authservice.service';
 import { Router } from '@angular/router';
 import { onAuthStateChanged, User } from 'firebase/auth';
 import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
+import { DatabasecommsService } from '../databasecomms.service';
 
 @Component({
   selector: 'app-profilepage',
@@ -16,9 +17,16 @@ import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
 export class ProfilepageComponent implements OnInit{
 
   public username: string = ''
+  public imageURL: string = ''
   public email: string = ''
 
-  constructor(private auth: AuthserviceService, private router: Router){}
+  constructor(private auth: AuthserviceService, private router: Router, private db: DatabasecommsService){
+
+    this.profileUpdateForm.valueChanges.subscribe(() => {
+      this.formChanged = true;
+    });
+
+  }
 
   profileUpdateForm = new FormGroup({
     imageURL: new FormControl(''),
@@ -33,10 +41,10 @@ export class ProfilepageComponent implements OnInit{
     type: new FormControl('')
   })
 
+  formChanged = false
 
-
-  ngOnInit(): void {
-     onAuthStateChanged(this.auth.getAuth(), (user: User | null) => {
+  async ngOnInit(): Promise<void> {
+     onAuthStateChanged(this.auth.getAuth(), async (user: User | null) => {
           if (!user) {
             console.log('User is not logged in, returning to login page...');
             this.router.navigate(['']);
@@ -44,27 +52,44 @@ export class ProfilepageComponent implements OnInit{
             console.log('User is logged in:', user);
             this.username = this.auth.getAuth().currentUser?.displayName ||  this.auth.getAuth().currentUser?.email?.split('@')[0] || 'Guest user'
             this.email = this.auth.getAuth().currentUser?.email || 'No email'
+            this.imageURL = await this.db.getUserImageURL(this.auth.getCurrentUser()?.uid || 'failed')
+            
+            console.log('imageURL:', this.imageURL)
 
             this.profileUpdateForm.patchValue({
-              username: this.username
+              username: this.username,
+              imageURL: this.imageURL
             });
-          
-      
+            this.formChanged = false
+            console.log(this.formChanged)
+
+
         }
       });
+
+      
   }
 
-  onUpdateInfo() {
+  async onUpdateInfo() {
     const updatedProfile = this.profileUpdateForm.value;
-    console.log("updated Profile Info: ", updatedProfile)
+
+    if (updatedProfile.username != this.username) {
+      await this.auth.updateUserDisplayName(updatedProfile.username || this.username).then(() => window.location.reload())
+      console.log("updated Profile Info: ", updatedProfile)
+    }
+
+    this.formChanged = false
   }
 
   onUploadProduct(){
     const newProduct = this.productUploadForm.value;
-    console.log("new Product: ", newProduct)
+    console.log("New Product: ", newProduct)
   }
 
-  onDeleteAccount(){
+  async onDeleteAccount(){
+    await this.db.removeUser(this.auth.getAuth().currentUser?.uid || 'None')
+    await this.auth.removeUser()
+    await this.auth.logout()
     console.log("Deleting account")
   }
 

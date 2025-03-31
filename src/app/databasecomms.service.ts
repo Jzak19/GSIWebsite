@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, addDoc, doc, getDocs, getDoc, updateDoc, arrayUnion} from 'firebase/firestore';
+import { getFirestore, collection, addDoc, doc, getDocs, getDoc, updateDoc, arrayUnion, setDoc, deleteDoc} from 'firebase/firestore';
 import firebaseConfig from '../environment';
 
 @Injectable({
@@ -121,6 +121,52 @@ export class DatabasecommsService {
       console.log("Review submitted")
     } catch (error) {
       console.log(error)
+    }
+  }
+
+  async createUserStorage(userID: string, imageURL: string) {
+    try {
+      const userDocRef = doc(collection(this.db, 'users'), userID);
+      const docSnapshot = await getDoc(userDocRef);
+  
+      if (!docSnapshot.exists()) {
+        await setDoc(userDocRef, {
+          imageUrl: imageURL,
+        });
+        console.log("User storage created successfully with image URL");
+      } else {
+        console.log("User already exists, skipping creation");
+      }
+    } catch (error) {
+      console.error("Error creating user storage:", error);
+    }
+  }
+
+
+  async getUserImageURL(userID: string) {
+    console.log("Getting user image")
+
+
+    const imageRef = doc(this.db, `users/${userID}`)
+    const imageSnap = await getDoc(imageRef)
+
+    if (imageSnap.exists()) {
+      const url = imageSnap.data()?.['imageUrl']
+      return url
+    } else {
+      return 'No image URL found'
+    }
+
+
+  }
+
+  async removeUser(userID: string) {
+    try {
+      const userDocRef = doc(this.db, 'users', userID);
+      await deleteDoc(userDocRef);
+      console.log(`User document with ID ${userID} deleted successfully.`);
+    } catch (error) {
+      console.error("Error deleting user document:", error);
     }
   }
 }

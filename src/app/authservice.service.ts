@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { initializeApp } from 'firebase/app';  // Import the initializeApp function
-import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, User, createUserWithEmailAndPassword, signInAnonymously, UserCredential, setPersistence, browserLocalPersistence, browserSessionPersistence} from 'firebase/auth';  // Import Authentication methods
+import { updateProfile, getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, User, createUserWithEmailAndPassword, signInAnonymously, UserCredential, setPersistence, browserLocalPersistence, browserSessionPersistence} from 'firebase/auth';  // Import Authentication methods
 import firebaseConfig from '../environment';  // Your Firebase config
 
 @Injectable({
@@ -67,5 +67,22 @@ export class AuthserviceService {
 
   getAuth() {
     return this.auth;
+  }
+
+  
+
+  async updateUserDisplayName(newsUserName: string): Promise<any> {
+
+    const currentUser = this.auth.currentUser
+
+    if (currentUser) {
+      await updateProfile(currentUser, {displayName: newsUserName} )
+    } else {
+      console.log("No authenticated user. Cannot update profile")
+    }
+  }
+
+  async removeUser(): Promise<any> {
+    this.auth.currentUser?.delete()
   }
 }

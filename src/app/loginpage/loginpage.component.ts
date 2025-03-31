@@ -4,6 +4,7 @@ import { AuthserviceService } from '../authservice.service';
 import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';  
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { DatabasecommsService } from '../databasecomms.service';
 
 
 @Component({
@@ -16,7 +17,7 @@ import { Router } from '@angular/router';
 })
 export class LoginpageComponent {
 
-  constructor(private authService: AuthserviceService, private router: Router) {}
+  constructor(private authService: AuthserviceService, private router: Router, private db: DatabasecommsService) {}
 
   userForm = new FormGroup({
     email: new FormControl(''),
@@ -25,7 +26,7 @@ export class LoginpageComponent {
 
   errorMessage: string = ''
 
-  submitData(type: string){
+  async submitData(type: string){
     switch (type){
       case 'login' :
         console.log('Attempting user login: ', this.userForm.value.email, this.userForm.value.password)
@@ -38,17 +39,21 @@ export class LoginpageComponent {
         break
       case 'register' :
         console.log('Attempting registration of user: ', this.userForm.value.email, this.userForm.value.password)
-        this.authService.register(this.userForm.value.email!, this.userForm.value.password!).then(() => {
+        this.authService.register(this.userForm.value.email!, this.userForm.value.password!).then( async () => {
+          await this.db.createUserStorage(this.authService.getAuth().currentUser?.uid || 'None', 'https://img.freepik.com/premium-vector/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-vector-illustration_561158-3383.jpg?w=826')
           console.log("Login Success!")
           this.router.navigate(['/main'])
         }).catch((error) => {
           this.errorMessage = "Register failed, user must already exist!"
         })
+
+        
         break
       case 'guest' :
         console.log('Guest registration')
         console.log('Attempting registration of user: ', this.userForm.value.email, this.userForm.value.password)
-        this.authService.signInAsGuest().then(() => {
+        this.authService.signInAsGuest().then(async () => {
+          await this.db.createUserStorage(this.authService.getAuth().currentUser?.uid || 'None', 'https://img.freepik.com/premium-vector/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-vector-illustration_561158-3383.jpg?w=826')
           console.log("Login Success!")
           this.router.navigate(['/main'])
         }).catch((error) => {

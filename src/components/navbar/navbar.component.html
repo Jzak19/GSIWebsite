@@ -21,14 +21,14 @@
         <!-- Profile Dropdown -->
         <div class="relative">
           <button (click)="toggleDropdown()" class="focus:outline-none hover:cursor-pointer">
-            <img src="/assets/profile-icon.svg" alt="Profile" class="h-8 w-8 rounded-full">
+            <img [src]="this.imageURL" alt="Profile" class="h-12 w-12 rounded-full">
           </button>
   
           <div *ngIf="dropdownOpen" class="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg overflow-hidden z-20">
             @if (this.auth.getCurrentUser()?.isAnonymous == false) {
               <a href="/profile" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:cursor-pointer">Profile</a>
             } @else {
-              <a href="" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:cursor-pointer">Sign Up</a>
+              <a href="" (click)="logout()" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:cursor-pointer">Sign Up</a>
             }
             <a class="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:cursor-pointer" (click)="logout()">Logout</a>
           </div>
