@@ -62,8 +62,6 @@ export class ProfilepageComponent implements OnInit{
             });
             this.formChanged = false
             console.log(this.formChanged)
-
-
         }
       });
 
