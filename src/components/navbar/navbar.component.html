@@ -1,4 +1,4 @@
-<nav class="bg-white shadow-md w-full sticky top-0 z-10">
+<nav class="bg-white shadow-md w-full sticky top-0 z-50">
     <div class="max-w-full mx-auto px-4 sm:px-4 lg:px-4">
       <div class="flex justify-between h-16 items-center">
         <!-- Mobile Menu Button on the Left -->
@@ -24,7 +24,8 @@
             <img [src]="this.imageURL" alt="Profile" class="h-12 w-12 rounded-full object-cover">
           </button>
   
-          <div *ngIf="dropdownOpen" class="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg overflow-hidden z-20">
+          <div *ngIf="dropdownOpen" class="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg overflow-hidden z-50">
+            <a class="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:cursor-pointer dark:bg-gray-700 dark:text-white" (click)="toggleTheme()">Change Theme</a>
             @if (this.auth.getCurrentUser()?.isAnonymous == false) {
               <a href="/profile" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:cursor-pointer">Profile</a>
             } @else {
