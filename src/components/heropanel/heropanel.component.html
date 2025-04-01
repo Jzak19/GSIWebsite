@@ -1,23 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
 
-<div class="flex flex-col justify-center items-center mt-20 p-6">
-  <div class="text-center bg-white p-8 md:p-16 rounded-2xl shadow-lg max-w-2xl w-full">
+<div class="flex flex-col justify-center items-center mt-20 p-6 dark:bg-gray-700 dark:text-white">
+  <div class="text-center bg-white p-8 md:p-16 rounded-2xl shadow-lg max-w-2xl w-full dark:bg-gray-500">
 
     @if (userName) {
-      <h1 class="text-4xl md:text-5xl font-bold text-blue-600 mb-4">Welcome {{userName}}</h1>
+      <h1 class="text-4xl md:text-5xl font-bold text-blue-600 mb-4 dark:text-white">Welcome {{userName}}</h1>
     } @else if (title) {
-      <h1 class="text-4xl md:text-5xl font-bold text-blue-600 mb-20">{{title}}</h1>
+      <h1 class="text-4xl md:text-5xl font-bold text-blue-600 mb-20 dark:text-white">{{title}}</h1>
     }
     
-    <h2 class="text-xl md:text-2xl text-gray-700">{{message}}</h2>
+    <h2 class="text-xl md:text-2xl text-gray-700 dark:text-white">{{message}}</h2>
   </div>
 </div>
 
-</html>
 

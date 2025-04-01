@@ -3,18 +3,18 @@
     <div class="absolute top-0 left-0 w-full h-full pointer-events-none">
       <div class="absolute top-0 w-full h-16 bg-gradient-to-b from-transparent to-transparent"></div>
       <div class="absolute bottom-0 w-full h-16 bg-gradient-to-t from-transparent to-transparent"></div>
-      <div class="absolute left-0 w-10 h-full bg-gradient-to-r from-[rgb(207,228,254,1)] to-[rgba(255,255,255,0)] backdrop-blur-sm z-10"></div>
-      <div class="absolute right-0 w-10 h-full bg-gradient-to-l from-[rgb(207,228,254,0.5)] to-[rgba(255,255,255,0)] backdrop-blur-sm z-10"></div>
+      <div class="absolute left-0 w-10 h-full bg-gradient-to-r from-[rgb(207,228,254,1)] to-[rgba(255,255,255,0)] dark:hidden backdrop-blur-sm z-10"></div>
+      <div class="absolute right-0 w-10 h-full bg-gradient-to-l from-[rgb(207,228,254,1)] to-[rgba(255,255,255,0)] dark:hidden backdrop-blur-sm z-10"></div>
     </div>
   
     <!-- Infinite Scroll Content with User Reviews -->
     <div class="flex flex-row animate-scroll space-x-4">
       @for (item of duplicatedItems; track item) {
-        <div class="min-w-1/4 min-h-64 p-4 bg-white shadow-lg rounded-xl my-10 z-0">
-          <h3 class="text-lg font-bold mb-2">{{ item.product }}</h3>
-          <p class="text-gray-500 mb-2">Reviewed by: <span class="font-semibold">{{ item.username }}</span></p>
-          <p class="text-yellow-400 text-xl mb-2">{{ item.stars }}</p>
-          <p class="text-gray-600 italic ">"{{ item.review }}"</p>
+        <div class="min-w-1/4 min-h-64 p-4 bg-white shadow-lg rounded-xl my-10 z-0 dark:bg-gray-500">
+          <h3 class="text-lg font-bold mb-2 dark:text-white">{{ item.product }}</h3>
+          <p class="text-gray-500 mb-2 dark:text-white">Reviewed by: <span class="font-semibold">{{ item.username }}</span></p>
+          <p class="text-yellow-400 text-xl mb-2 dark:text-white">{{ item.stars }}</p>
+          <p class="text-gray-600 italic dark:text-white">"{{ item.review }}"</p>
         </div>
       }
     </div>

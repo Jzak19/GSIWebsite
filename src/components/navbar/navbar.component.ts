@@ -4,6 +4,7 @@ import { AuthserviceService } from '../../app/authservice.service';
 import { Router } from '@angular/router';
 import { DatabasecommsService } from '../../app/databasecomms.service';
 import { onAuthStateChanged, User } from 'firebase/auth';
+import { ThemeService } from '../../theme.service';
 
 @Component({
   selector: 'app-navbar',
@@ -16,7 +17,7 @@ export class NavbarComponent implements OnInit{
 
   imageURL: string = ''
 
-  constructor(public auth: AuthserviceService, private router: Router, private db: DatabasecommsService) {}
+  constructor(public auth: AuthserviceService, private router: Router, private db: DatabasecommsService, public theme: ThemeService) {}
 
   async ngOnInit(): Promise<void> {
     onAuthStateChanged(this.auth.getAuth(), async (user: User | null) => {
@@ -51,5 +52,10 @@ export class NavbarComponent implements OnInit{
       this.router.navigate([''])
       console.log("Logging out...")
     })
+  }
+
+  toggleTheme() {
+    this.theme.toggleTheme();
+    console.log("Theme changed")
   }
 }
