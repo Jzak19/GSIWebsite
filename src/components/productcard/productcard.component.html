@@ -1,5 +1,5 @@
    <a class="block transform transition-transform duration-300 hover:scale-105 hover:cursor-pointer" (click)="goToProductPage($event, { title, year, description, reviewCount, image, ID, type })"> 
-    <div class="min-w-82 max-w-xs h-85 rounded-xl overflow-hidden shadow-lg bg-white">
+    <div class="min-w-82 max-w-xs h-85 rounded-xl overflow-hidden shadow-lg bg-white dark:bg-gray-500">
         <!-- Product Image -->
          @if (image) {
             <img class="w-full h-40 object-cover rounded-t-xl" [src]="image" alt="">
@@ -10,21 +10,21 @@
         <!-- Product Details -->
         <div class="px-4 py-4 min-h-32 flex flex-col justify-between">
         <!-- Title -->
-        <h2 class="font-semibold text-lg text-gray-800 truncate">{{ title }}</h2>
+        <h2 class="font-semibold text-lg text-gray-800 truncate dark:text-white">{{ title }}</h2>
 
         @if (this.year) {
-            <h3 class="font-semibold text-lg text-gray-400 truncate">{{ year }}</h3>
+            <h3 class="font-semibold text-lg text-gray-400 truncate dark:text-white">{{ year }}</h3>
         }
         
     
         <!-- Description -->
-        <p class="text-gray-600 text-sm mt-2 line-clamp-2">{{ description }}</p>
+        <p class="text-gray-600 text-sm mt-2 line-clamp-2 dark:text-white">{{ description }}</p>
         </div>
     
         <!-- Review Count -->
         <div class="px-4 pb-2 flex items-center text-gray-700">
             <span class="mr-2 text-yellow-500">⭐</span>
-            <span class="text-sm">{{ reviewCount }} Reviews</span>
+            <span class="text-sm dark:text-white">{{ reviewCount }} Reviews</span>
         </div>
     </div>
    </a>
