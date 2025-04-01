@@ -4,10 +4,3 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-html {
-    @apply bg-gradient-to-b from-blue-50 via-blue-100 to-blue-200;
-}
-
-html.dark {
-    @apply bg-gradient-to-b from-gray-900 via-gray-800 to-gray-700 text-white;
-}

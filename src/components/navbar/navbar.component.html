@@ -1,4 +1,4 @@
-<nav class="bg-white shadow-md w-full sticky top-0 z-50">
+<nav class="shadow-md w-full sticky top-0 z-50 dark:bg-gray-700 dark:text-white bg-white">
     <div class="max-w-full mx-auto px-4 sm:px-4 lg:px-4">
       <div class="flex justify-between h-16 items-center">
         <!-- Mobile Menu Button on the Left -->
@@ -13,9 +13,9 @@
   
         <!-- Navigation Links for Desktop -->
         <div class="hidden md:flex space-x-8">
-          <a href="/cars" class="text-gray-600 hover:text-blue-600">Cars</a>
-          <a href="/clothes" class="text-gray-600 hover:text-blue-600">Clothes</a>
-          <a href="/household" class="text-gray-600 hover:text-blue-600">Household</a>
+          <a href="/cars" class=" hover:text-blue-600">Cars</a>
+          <a href="/clothes" class=" hover:text-blue-600">Clothes</a>
+          <a href="/household" class=" hover:text-blue-600">Household</a>
         </div>
   
         <!-- Profile Dropdown -->
@@ -25,13 +25,13 @@
           </button>
   
           <div *ngIf="dropdownOpen" class="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg overflow-hidden z-50">
-            <a class="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:cursor-pointer dark:bg-gray-700 dark:text-white" (click)="toggleTheme()">Change Theme</a>
+            <a class="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:cursor-pointer dark:bg-gray-700 dark:text-white dark:hover:bg-gray-900" (click)="toggleTheme()">Change Theme</a>
             @if (this.auth.getCurrentUser()?.isAnonymous == false) {
-              <a href="/profile" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:cursor-pointer">Profile</a>
+              <a href="/profile" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:cursor-pointer dark:bg-gray-700 dark:text-white dark:hover:bg-gray-900">Profile</a>
             } @else {
-              <a href="" (click)="logout()" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:cursor-pointer">Sign Up</a>
+              <a href="" (click)="logout()" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:cursor-pointer dark:bg-gray-700 dark:text-white dark:hover:bg-gray-900">Sign Up</a>
             }
-            <a class="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:cursor-pointer" (click)="logout()">Logout</a>
+            <a class="block px-4 py-2 text-gray-700 hover:bg-gray-100 hover:cursor-pointer dark:bg-gray-700 dark:text-white dark:hover:bg-gray-900" (click)="logout()">Logout</a>
           </div>
         </div>
       </div>
